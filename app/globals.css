@@ -1,26 +1,39 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --sara-cream: #FFF8E7;
+  --sara-red: #D32F2F;
+  --sara-red-dark: #B71C1C;
+  --sara-black: #1A1A1A;
+  --sara-gold: #FFD700;
+  --sara-gray: #555555;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-[var(--sara-cream)] text-[var(--sara-black)] font-['Poppins'];
+}
+
+.sara-btn-primary {
+  @apply bg-[var(--sara-red)] text-white px-6 py-3 rounded-md font-semibold hover:bg-[var(--sara-red-dark)] transition-all duration-300;
+}
+
+.sara-btn-secondary {
+  @apply bg-[var(--sara-gold)] text-[var(--sara-black)] px-6 py-3 rounded-md font-semibold hover:bg-[#D4AF37] transition-all duration-300;
+}
+
+.sara-shadow-card {
+  @apply shadow-lg hover:shadow-xl transition-shadow duration-300;
+}
+@layer components {
+  .sara-blockquote::before {
+    content: '\201C'; /* Left double quote */
+    @apply text-[var(--sara-gray)] text-2xl mr-1;
+  }
+  .sara-blockquote::after {
+    content: '\201D'; /* Right double quote */
+    @apply text-[var(--sara-gray)] text-2xl ml-1;
+  }
 }
