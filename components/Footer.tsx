@@ -1,11 +1,5 @@
-import {
-  Facebook,
-  Instagram,
-  Mail,
-  MapPin,
-  Phone,
-  Youtube,
-} from "lucide-react";
+import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
+import { FaTiktok } from "react-icons/fa"; // Import TikTok from a different library
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -30,7 +24,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <h3 className="text-2xl font-bold text-[var(--sara-gold)] mb-4">
-              Sara Decor
+              Agos Decor
             </h3>
             <p className="text-gray-300 mb-6">
               Transforming events into magical experiences in Addis Ababa,
@@ -38,14 +32,29 @@ export function Footer() {
             </p>
             <div className="flex space-x-4">
               {[
-                { icon: Facebook, href: "#" },
-                { icon: Instagram, href: "#" },
-                { icon: Youtube, href: "#" },
+                {
+                  icon: Facebook,
+                  href: "https://facebook.com/yourpage",
+                  ariaLabel: "Facebook",
+                },
+                {
+                  icon: Instagram,
+                  href: "https://instagram.com/yourprofile",
+                  ariaLabel: "Instagram",
+                },
+                {
+                  icon: FaTiktok,
+                  href: "https://tiktok.com/@youraccount",
+                  ariaLabel: "TikTok",
+                }, // Changed here
               ].map((social, i) => (
                 <a
                   key={i}
                   href={social.href}
                   className="w-10 h-10 bg-[var(--sara-red)] rounded-full flex items-center justify-center hover:bg-[var(--sara-red-dark)]"
+                  aria-label={social.ariaLabel}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <social.icon className="h-5 w-5" />
                 </a>
@@ -101,7 +110,7 @@ export function Footer() {
               <div className="flex items-start space-x-3">
                 <Mail className="h-5 w-5 text-[var(--sara-red)] mt-1" />
                 <div>
-                  <p className="text-gray-300">info@saradecor.com</p>
+                  <p className="text-gray-300">info@agosdecor.com</p>
                   <p className="text-gray-400 text-sm">24/7 Support</p>
                 </div>
               </div>
@@ -119,7 +128,7 @@ export function Footer() {
       <div className="border-t border-gray-700 py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-gray-400 text-sm">
-            © {currentYear} Sara Decor. All rights reserved.
+            © {currentYear} Agos Decor. All rights reserved.
           </p>
         </div>
       </div>

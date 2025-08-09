@@ -208,7 +208,7 @@ export default function Contact() {
                 },
                 {
                   icon: <Mail className="h-5 w-5" />,
-                  title: "info@saradecor.com",
+                  title: "info@agosdecor.com",
                   subtitle: "24/7 Support",
                 },
                 {

@@ -4,9 +4,9 @@ import { Navbar } from "../components/Navbar";
 import "./globals.css";
 
 export const metadata = {
-  title: "Sara Decor – Event Decor in Addis Ababa",
+  title: "Agos Decor – Event Decor in Addis Ababa",
   description:
-    "Transform your events with Sara Decor’s elegant, personalized styling for weddings, birthdays, and more in Addis Ababa, Ethiopia.",
+    "Transform your events with Agos Decor’s elegant, personalized styling for weddings, birthdays, and more in Addis Ababa, Ethiopia.",
 };
 
 export default function RootLayout({

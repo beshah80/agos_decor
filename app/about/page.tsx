@@ -86,7 +86,7 @@ export default function About() {
             <span className="block absolute bottom-0 left-0 h-1 bg-[var(--sara-red)] w-0 group-hover:w-full transition-all duration-500 ease-in-out"></span>
           </h1>
           <p className="text-base sm:text-lg text-[var(--sara-gray)] max-w-3xl mx-auto leading-relaxed font-light">
-            At Sara Decor, every event is a canvas. Founded with passion and
+            At Agos Decor, every event is a canvas. Founded with passion and
             creativity, we’ve spent years perfecting the art of modern,
             luxurious, and culturally inspired decor.
           </p>

@@ -1,14 +1,13 @@
 "use client";
 
+import { motion, Variants } from "framer-motion";
+import { Diamond } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 import { ServiceCard } from "../components/ServiceCard";
 import { TestimonialCard } from "../components/TestimonialCard";
 import { Service, Testimonial } from "../types";
-// We only need 'motion' and 'Variants' for the animation. 'AnimatePresence' is not used.
-import { motion, Variants } from "framer-motion";
-import { Diamond } from "lucide-react";
-import { useEffect } from "react";
 
 const services: Service[] = [
   {
@@ -57,7 +56,7 @@ const testimonials: Testimonial[] = [
     name: "Amina Kedir",
     event: "Baby Shower",
     rating: 5,
-    text: "Sara Decor made my baby shower absolutely magical!",
+    text: "Agos Decor made my baby shower absolutely magical!",
     image: "/images/testimonial/amina_kedir.jpg",
   },
   {
@@ -79,49 +78,6 @@ const testimonials: Testimonial[] = [
 ];
 
 export default function Home() {
-  // This constant needs to be defined within the component's scope.
-  // We've moved it to the top of the Home function to be clear about its scope.
-  const tiktokVideos = [
-    {
-      videoId: "7512852683330456837",
-      ariaLabel: "Sara Decor baby shower welcoming surprise",
-    },
-    {
-      videoId: "7536220416419859718",
-      ariaLabel: "Sara Decor event decor in Addis Ababa",
-    },
-    {
-      videoId: "7534737428012158213",
-      ariaLabel: "Sara Decor baby event decoration package",
-    },
-    {
-      videoId: "7532140408336403768",
-      ariaLabel: "Sara Decor elegant baby shower decor",
-    },
-    {
-      videoId: "7528429516906138886",
-      ariaLabel: "Sara Decor baby shower package showcase",
-    },
-    {
-      videoId: "7527689521723411768",
-      ariaLabel: "Sara Decor vibrant baby shower decor in Ethiopia",
-    },
-    {
-      videoId: "7526945384472513797",
-      ariaLabel: "Sara Decor beautiful welcoming decor",
-    },
-    {
-      videoId: "7525832991529127173",
-      ariaLabel: "Sara Decor creative baby shower setup in Addis Ababa",
-    },
-    {
-      videoId: "7523232953938267397",
-      ariaLabel: "Sara Decor stunning baby shower with welcoming theme",
-    },
-  ];
-
-  // A client component is required for Framer Motion, and this hook
-  // ensures the scroll-smooth class is applied to the root element.
   useEffect(() => {
     document.documentElement.classList.add("scroll-smooth");
     return () => {
@@ -129,14 +85,11 @@ export default function Home() {
     };
   }, []);
 
-  // Framer Motion variants for animations
-  // Explicitly defining the type as `Variants` to resolve the TypeScript error.
   const heroVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 1 } },
   };
 
-  // Explicitly defining the type as `Variants` to resolve the TypeScript error.
   const textVariants: Variants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
@@ -146,7 +99,6 @@ export default function Home() {
     },
   };
 
-  // Explicitly defining the type as `Variants` to resolve the TypeScript error.
   const buttonVariants: Variants = {
     hidden: { scale: 0.9, opacity: 0 },
     visible: {
@@ -157,7 +109,6 @@ export default function Home() {
     hover: { scale: 1.05, transition: { duration: 0.2 } },
   };
 
-  // Explicitly defining the type as `Variants` to resolve the TypeScript error.
   const sectionVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
@@ -166,12 +117,11 @@ export default function Home() {
       transition: {
         duration: 0.7,
         ease: "easeOut",
-        staggerChildren: 0.15, // Animate children with a slight delay
+        staggerChildren: 0.15,
       },
     },
   };
 
-  // Explicitly defining the type as `Variants` to resolve the TypeScript error.
   const cardVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -192,7 +142,6 @@ export default function Home() {
     },
   };
 
-  // Explicitly defining the type as `Variants` to resolve the TypeScript error.
   const featureVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: (index: number) => ({
@@ -207,10 +156,10 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className="min-h-screen">
       {/* Hero Section */}
       <motion.section
-        className="relative min-h-screen flex items-center pt-16 overflow-hidden"
+        className="relative min-h-[80vh] flex items-center pt-16 overflow-hidden px-4"
         variants={heroVariants}
         initial="hidden"
         animate="visible"
@@ -224,49 +173,38 @@ export default function Home() {
             className="opacity-20 blur-sm"
             priority
             loading="eager"
+            sizes="100vw"
           />
-          <div className="absolute inset-0 bg-[var(--sara-cream)]/90 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-[var(--sara-cream)]/95 backdrop-blur-sm" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight tracking-tight"
             variants={textVariants}
           >
             Elegant. Memorable.{" "}
             <span className="text-[var(--sara-red)]">Timeless.</span>
           </motion.h1>
           <motion.p
-            className="text-base sm:text-lg md:text-xl text-[var(--sara-gray)] mb-8 max-w-2xl mx-auto leading-relaxed"
+            className="text-lg sm:text-xl md:text-2xl text-[var(--sara-gray)] mb-8 max-w-3xl mx-auto leading-relaxed"
             variants={textVariants}
           >
-            Transform your event with Sara Decor’s signature style. Weddings,
+            Transform your event with Agos Decor’s signature style. Weddings,
             birthdays, showers — made magical.
           </motion.p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 max-w-lg mx-auto">
             <motion.div
               variants={buttonVariants}
               initial="hidden"
               animate="visible"
               whileHover="hover"
+              className="w-full sm:w-auto"
             >
               <Link
                 href="/services"
-                className="sara-btn-primary focus:outline-2 focus:outline-offset-2 focus:outline-[var(--sara-red)]"
+                className="sara-btn-primary w-full focus:outline-2 focus:outline-offset-2 focus:outline-[var(--sara-red)] py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-lg font-medium rounded-lg transition-all duration-300 hover:bg-[var(--sara-red)]/90"
               >
-                Our Services
-              </Link>
-            </motion.div>
-            <motion.div
-              variants={buttonVariants}
-              initial="hidden"
-              animate="visible"
-              whileHover="hover"
-            >
-              <Link
-                href="/book-now"
-                className="sara-btn-secondary focus:outline-2 focus:outline-offset-2 focus:outline-[var(--sara-red)]"
-              >
-                Book Us Now
+                Explore Services
               </Link>
             </motion.div>
           </div>
@@ -275,21 +213,21 @@ export default function Home() {
 
       {/* Services Preview */}
       <motion.section
-        className="py-20 bg-white"
+        className="py-20 sm:py-24 bg-white"
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8 tracking-wide">
             Our <span className="text-[var(--sara-red)]">Services</span>
           </h2>
-          <p className="text-base sm:text-lg text-[var(--sara-gray)] text-center mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-[var(--sara-gray)] text-center mb-12 sm:mb-16 max-w-3xl mx-auto leading-relaxed">
             From intimate gatherings to grand celebrations, we create memorable
             experiences.
           </p>
-          <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {services.slice(0, 3).map((service, index) => (
               <motion.div
                 key={service.id}
@@ -301,12 +239,12 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
-          <div className="text-center mt-12">
+          <div className="text-center mt-12 sm:mt-16">
             <Link
               href="/services"
-              className="sara-btn-primary focus:outline-2 focus:outline-offset-2 focus:outline-[var(--sara-red)]"
+              className="sara-btn-primary py-2 sm:py-3 px-4 sm:px-6 text-sm sm:text-lg font-medium rounded-lg transition-all duration-300 hover:bg-[var(--sara-red)]/90"
             >
-              View All Services
+              Explore All Services
             </Link>
           </div>
         </div>
@@ -314,17 +252,17 @@ export default function Home() {
 
       {/* Testimonials */}
       <motion.section
-        className="py-20 bg-[var(--sara-cream)]"
+        className="py-20 sm:py-24 bg-[var(--sara-cream)]"
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8 tracking-wide">
             What Our <span className="text-[var(--sara-red)]">Clients Say</span>
           </h2>
-          <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={testimonial.id}
@@ -341,22 +279,22 @@ export default function Home() {
 
       {/* Why Choose Us */}
       <motion.section
-        className="py-20 bg-white"
+        className="py-20 sm:py-24 bg-white"
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8 tracking-wide">
             Why Choose{" "}
-            <span className="text-[var(--sara-red)]">Sara Decor</span>
+            <span className="text-[var(--sara-red)]">Agos Decor</span>
           </h2>
-          <p className="text-base sm:text-lg text-[var(--sara-gray)] text-center mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-[var(--sara-gray)] text-center mb-12 sm:mb-16 max-w-3xl mx-auto leading-relaxed">
             We’re storytellers who bring emotion and elegance to every event
             setup.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {[
               {
                 title: "Personalized Designs",
@@ -377,95 +315,75 @@ export default function Home() {
             ].map((feature, i) => (
               <motion.div
                 key={i}
-                className="text-center"
+                className="text-center p-6 bg-[var(--sara-cream)]/50 rounded-lg shadow-sm"
                 variants={featureVariants}
                 custom={i}
               >
-                <div className="w-16 h-16 mx-auto mb-4 bg-[var(--sara-red)]/20 rounded-full flex items-center justify-center">
-                  <div className="w-12 h-12 bg-[var(--sara-red)] rounded-full flex items-center justify-center">
-                    {/* Replaced star with a more elegant diamond icon */}
-                    <Diamond className="text-white w-6 h-6" />
+                <div className="w-14 sm:w-16 h-14 sm:h-16 mx-auto mb-4 bg-[var(--sara-red)]/20 rounded-full flex items-center justify-center">
+                  <div className="w-10 sm:w-12 h-10 sm:h-12 bg-[var(--sara-red)] rounded-full flex items-center justify-center">
+                    <Diamond className="text-white w-5 sm:w-6 h-5 sm:h-6" />
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                <p className="text-[var(--sara-gray)]">{feature.description}</p>
+                <h3 className="text-lg sm:text-xl font-semibold mb-3">
+                  {feature.title}
+                </h3>
+                <p className="text-[var(--sara-gray)] text-sm sm:text-base">
+                  {feature.description}
+                </p>
               </motion.div>
             ))}
           </div>
         </div>
       </motion.section>
 
-      {/* Video Showcase */}
+      {/* Video Showcase - Single TikTok link */}
       <motion.section
-        className="py-20 bg-[var(--sara-cream)]"
+        className="py-20 sm:py-24 bg-[var(--sara-cream)]"
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 tracking-wide">
             See Our <span className="text-[var(--sara-red)]">Magic</span> in
             Action
           </h2>
-          <p className="text-base sm:text-lg text-[var(--sara-gray)] mb-16 max-w-2xl mx-auto leading-relaxed">
-            Explore our stunning event setups through these showcase videos.
+          <p className="text-base sm:text-lg md:text-xl text-[var(--sara-gray)] mb-12 sm:mb-16 max-w-3xl mx-auto leading-relaxed">
+            Discover our stunning event setups on our TikTok page.
           </p>
-          <div className="text-center mb-12">
-            <Link
-              href="#videos"
-              className="sara-btn-primary focus:outline-2 focus:outline-offset-2 focus:outline-[var(--sara-red)]"
+          <div className="text-center">
+            <a
+              href="https://www.tiktok.com/@agos_postpartumcare"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sara-btn-primary py-2 sm:py-3 px-4 sm:px-6 text-sm sm:text-lg font-medium rounded-lg transition-all duration-300 hover:bg-[var(--sara-red)]/90"
             >
-              Watch Now
-            </Link>
-          </div>
-          <div
-            id="videos"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {tiktokVideos.map((video, index) => (
-              <motion.div
-                key={index}
-                className="relative rounded-lg sara-shadow-card overflow-hidden mx-auto"
-                aria-label={video.ariaLabel}
-                variants={cardVariants}
-                custom={index}
-                whileHover="hover"
-              >
-                <iframe
-                  src={`https://www.tiktok.com/embed/v2/${video.videoId}`}
-                  className="w-full h-[400px] md:h-[450px] lg:h-[500px] aspect-[9/16]"
-                  allowFullScreen
-                  // The `scrolling` attribute is deprecated. Removing it as the parent div handles overflow.
-                  allow="encrypted-media;"
-                  loading="lazy"
-                  title={video.ariaLabel}
-                ></iframe>
-              </motion.div>
-            ))}
+              Discover Our Work
+            </a>
           </div>
         </div>
       </motion.section>
 
       {/* CTA */}
       <motion.section
-        className="py-20 bg-white"
+        className="py-20 sm:py-24 bg-white"
         variants={sectionVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 tracking-wide">
             Ready to Create Something{" "}
             <span className="text-[var(--sara-red)]">Beautiful</span>?
           </h2>
-          <p className="text-base sm:text-lg text-[var(--sara-gray)] mb-8 leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-[var(--sara-gray)] mb-8 leading-relaxed">
             Contact us today for a personalized consultation.
           </p>
           <Link
             href="/book-now"
-            className="sara-btn-primary focus:outline-2 focus:outline-offset-2 focus:outline-[var(--sara-red)]"
+            className="sara-btn-primary py-2 sm:py-3 px-4 sm:px-6 text-sm sm:text-lg font-medium rounded-lg transition-all duration-300 hover:bg-[var(--sara-red)]/90"
           >
             Book Us Now
           </Link>
