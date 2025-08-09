@@ -181,7 +181,7 @@ export default function Contact() {
           className="text-center mb-12"
         >
           <h1 className="text-3xl md:text-4xl font-bold text-[var(--sara-gray-dark)] mb-6">
-            Contact <span className="text-[var(--sara-red)]">Sara Decor</span>
+            Contact <span className="text-[var(--sara-red)]">Agos Decor</span>
           </h1>
           <p className="text-lg text-[var(--sara-gray)] max-w-2xl mx-auto">
             Let’s start planning your perfect event.
