@@ -1,8 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ServiceCard } from "../components/ServiceCard";
 import { TestimonialCard } from "../components/TestimonialCard";
 import { Service, Testimonial } from "../types";
+// We only need 'motion' and 'Variants' for the animation. 'AnimatePresence' is not used.
+import { motion, Variants } from "framer-motion";
+import { Diamond } from "lucide-react";
+import { useEffect } from "react";
 
 const services: Service[] = [
   {
@@ -73,85 +79,280 @@ const testimonials: Testimonial[] = [
 ];
 
 export default function Home() {
+  // This constant needs to be defined within the component's scope.
+  // We've moved it to the top of the Home function to be clear about its scope.
+  const tiktokVideos = [
+    {
+      videoId: "7512852683330456837",
+      ariaLabel: "Sara Decor baby shower welcoming surprise",
+    },
+    {
+      videoId: "7536220416419859718",
+      ariaLabel: "Sara Decor event decor in Addis Ababa",
+    },
+    {
+      videoId: "7534737428012158213",
+      ariaLabel: "Sara Decor baby event decoration package",
+    },
+    {
+      videoId: "7532140408336403768",
+      ariaLabel: "Sara Decor elegant baby shower decor",
+    },
+    {
+      videoId: "7528429516906138886",
+      ariaLabel: "Sara Decor baby shower package showcase",
+    },
+    {
+      videoId: "7527689521723411768",
+      ariaLabel: "Sara Decor vibrant baby shower decor in Ethiopia",
+    },
+    {
+      videoId: "7526945384472513797",
+      ariaLabel: "Sara Decor beautiful welcoming decor",
+    },
+    {
+      videoId: "7525832991529127173",
+      ariaLabel: "Sara Decor creative baby shower setup in Addis Ababa",
+    },
+    {
+      videoId: "7523232953938267397",
+      ariaLabel: "Sara Decor stunning baby shower with welcoming theme",
+    },
+  ];
+
+  // A client component is required for Framer Motion, and this hook
+  // ensures the scroll-smooth class is applied to the root element.
+  useEffect(() => {
+    document.documentElement.classList.add("scroll-smooth");
+    return () => {
+      document.documentElement.classList.remove("scroll-smooth");
+    };
+  }, []);
+
+  // Framer Motion variants for animations
+  // Explicitly defining the type as `Variants` to resolve the TypeScript error.
+  const heroVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 1 } },
+  };
+
+  // Explicitly defining the type as `Variants` to resolve the TypeScript error.
+  const textVariants: Variants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.8, delay: 0.3, ease: "easeOut" },
+    },
+  };
+
+  // Explicitly defining the type as `Variants` to resolve the TypeScript error.
+  const buttonVariants: Variants = {
+    hidden: { scale: 0.9, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: { duration: 0.6, delay: 0.5 },
+    },
+    hover: { scale: 1.05, transition: { duration: 0.2 } },
+  };
+
+  // Explicitly defining the type as `Variants` to resolve the TypeScript error.
+  const sectionVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        ease: "easeOut",
+        staggerChildren: 0.15, // Animate children with a slight delay
+      },
+    },
+  };
+
+  // Explicitly defining the type as `Variants` to resolve the TypeScript error.
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+    hover: {
+      scale: 1.05,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 10,
+      },
+    },
+  };
+
+  // Explicitly defining the type as `Variants` to resolve the TypeScript error.
+  const featureVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (index: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        delay: index * 0.1,
+        ease: "easeOut",
+      },
+    }),
+  };
+
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center pt-16">
+      <motion.section
+        className="relative min-h-screen flex items-center pt-16 overflow-hidden"
+        variants={heroVariants}
+        initial="hidden"
+        animate="visible"
+      >
         <div className="absolute inset-0">
           <Image
             src="/images/background/an_elegant_wedding_image_.jpeg"
             alt="Elegant wedding decoration"
-            layout="fill"
-            objectFit="cover"
-            className="opacity-20"
+            fill={true}
+            style={{ objectFit: "cover" }}
+            className="opacity-20 blur-sm"
+            priority
+            loading="eager"
           />
-          <div className="absolute inset-0 bg-[var(--sara-cream)]/90" />
+          <div className="absolute inset-0 bg-[var(--sara-cream)]/90 backdrop-blur-sm" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+          <motion.h1
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+            variants={textVariants}
+          >
             Elegant. Memorable.{" "}
             <span className="text-[var(--sara-red)]">Timeless.</span>
-          </h1>
-          <p className="text-lg md:text-xl text-[var(--sara-gray)] mb-8 max-w-2xl mx-auto">
+          </motion.h1>
+          <motion.p
+            className="text-base sm:text-lg md:text-xl text-[var(--sara-gray)] mb-8 max-w-2xl mx-auto leading-relaxed"
+            variants={textVariants}
+          >
             Transform your event with Sara Decor’s signature style. Weddings,
             birthdays, showers — made magical.
-          </p>
+          </motion.p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/services" className="sara-btn-primary">
-              Our Services
-            </Link>
-            <Link href="/book-now" className="sara-btn-secondary">
-              Book Us Now
-            </Link>
+            <motion.div
+              variants={buttonVariants}
+              initial="hidden"
+              animate="visible"
+              whileHover="hover"
+            >
+              <Link
+                href="/services"
+                className="sara-btn-primary focus:outline-2 focus:outline-offset-2 focus:outline-[var(--sara-red)]"
+              >
+                Our Services
+              </Link>
+            </motion.div>
+            <motion.div
+              variants={buttonVariants}
+              initial="hidden"
+              animate="visible"
+              whileHover="hover"
+            >
+              <Link
+                href="/book-now"
+                className="sara-btn-secondary focus:outline-2 focus:outline-offset-2 focus:outline-[var(--sara-red)]"
+              >
+                Book Us Now
+              </Link>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Services Preview */}
-      <section className="py-20 bg-white">
+      <motion.section
+        className="py-20 bg-white"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6">
             Our <span className="text-[var(--sara-red)]">Services</span>
           </h2>
-          <p className="text-lg text-[var(--sara-gray)] text-center mb-12 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-[var(--sara-gray)] text-center mb-12 max-w-2xl mx-auto leading-relaxed">
             From intimate gatherings to grand celebrations, we create memorable
             experiences.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.slice(0, 3).map((service) => (
-              <ServiceCard key={service.id} service={service} />
+          <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.slice(0, 3).map((service, index) => (
+              <motion.div
+                key={service.id}
+                variants={cardVariants}
+                custom={index}
+                whileHover="hover"
+              >
+                <ServiceCard service={service} />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
           <div className="text-center mt-12">
-            <Link href="/services" className="sara-btn-primary">
+            <Link
+              href="/services"
+              className="sara-btn-primary focus:outline-2 focus:outline-offset-2 focus:outline-[var(--sara-red)]"
+            >
               View All Services
             </Link>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-[var(--sara-cream)]">
+      <motion.section
+        className="py-20 bg-[var(--sara-cream)]"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6">
             What Our <span className="text-[var(--sara-red)]">Clients Say</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((testimonial) => (
-              <TestimonialCard key={testimonial.id} testimonial={testimonial} />
+          <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={testimonial.id}
+                variants={cardVariants}
+                custom={index}
+                whileHover="hover"
+              >
+                <TestimonialCard testimonial={testimonial} />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Why Choose Us */}
-      <section className="py-20 bg-white">
+      <motion.section
+        className="py-20 bg-white"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6">
             Why Choose{" "}
             <span className="text-[var(--sara-red)]">Sara Decor</span>
           </h2>
-          <p className="text-lg text-[var(--sara-gray)] text-center mb-12 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-[var(--sara-gray)] text-center mb-12 max-w-2xl mx-auto leading-relaxed">
             We’re storytellers who bring emotion and elegance to every event
             setup.
           </p>
@@ -174,103 +375,102 @@ export default function Home() {
                 description: "Your happiness is our priority.",
               },
             ].map((feature, i) => (
-              <div key={i} className="text-center">
+              <motion.div
+                key={i}
+                className="text-center"
+                variants={featureVariants}
+                custom={i}
+              >
                 <div className="w-16 h-16 mx-auto mb-4 bg-[var(--sara-red)]/20 rounded-full flex items-center justify-center">
                   <div className="w-12 h-12 bg-[var(--sara-red)] rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold">★</span>
+                    {/* Replaced star with a more elegant diamond icon */}
+                    <Diamond className="text-white w-6 h-6" />
                   </div>
                 </div>
                 <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
                 <p className="text-[var(--sara-gray)]">{feature.description}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Video Showcase */}
-      <section className="py-20 bg-[var(--sara-cream)]">
+      <motion.section
+        className="py-20 bg-[var(--sara-cream)]"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
             See Our <span className="text-[var(--sara-red)]">Magic</span> in
             Action
           </h2>
-          <p className="text-lg text-[var(--sara-gray)] mb-12 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-[var(--sara-gray)] mb-16 max-w-2xl mx-auto leading-relaxed">
             Explore our stunning event setups through these showcase videos.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                src: "/videos/show_case.mp4",
-                ariaLabel: "Sara Decor main showcase video",
-              },
-              {
-                src: "/videos/show_case.mp4",
-                ariaLabel: "Sara Decor wedding decoration video",
-              },
-              {
-                src: "/videos/show_case.mp4",
-                ariaLabel: "Sara Decor birthday party video",
-              },
-              {
-                src: "/videos/baby_shower.mp4",
-                ariaLabel: "Sara Decor baby shower video",
-              },
-              {
-                src: "/videos/show_case.mp4",
-                ariaLabel: "Sara Decor engagement party video",
-              },
-              {
-                src: "/videos/show_case.mp4",
-                ariaLabel: "Sara Decor graduation event video",
-              },
-              {
-                src: "/videos/show_case.mp4",
-                ariaLabel: "Sara Decor traditional ceremony video",
-              },
-              {
-                src: "/videos/show_case.mp4",
-                ariaLabel: "Sara Decor wedding highlight video",
-              },
-              {
-                src: "/videos/show_case.mp4",
-                ariaLabel: "Sara Decor celebration moment video",
-              },
-            ].map((video, index) => (
-              <div
+          <div className="text-center mb-12">
+            <Link
+              href="#videos"
+              className="sara-btn-primary focus:outline-2 focus:outline-offset-2 focus:outline-[var(--sara-red)]"
+            >
+              Watch Now
+            </Link>
+          </div>
+          <div
+            id="videos"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {tiktokVideos.map((video, index) => (
+              <motion.div
                 key={index}
-                className="relative rounded-lg sara-shadow-card overflow-hidden"
+                className="relative rounded-lg sara-shadow-card overflow-hidden mx-auto"
+                aria-label={video.ariaLabel}
+                variants={cardVariants}
+                custom={index}
+                whileHover="hover"
               >
-                <video
-                  src={video.src}
-                  controls
-                  autoPlay
-                  muted
-                  loop
-                  className="w-full h-auto"
-                  aria-label={video.ariaLabel}
-                />
-              </div>
+                <iframe
+                  src={`https://www.tiktok.com/embed/v2/${video.videoId}`}
+                  className="w-full h-[400px] md:h-[450px] lg:h-[500px] aspect-[9/16]"
+                  allowFullScreen
+                  // The `scrolling` attribute is deprecated. Removing it as the parent div handles overflow.
+                  allow="encrypted-media;"
+                  loading="lazy"
+                  title={video.ariaLabel}
+                ></iframe>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* CTA */}
-      <section className="py-20 bg-white">
+      <motion.section
+        className="py-20 bg-white"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
             Ready to Create Something{" "}
             <span className="text-[var(--sara-red)]">Beautiful</span>?
           </h2>
-          <p className="text-lg text-[var(--sara-gray)] mb-8">
+          <p className="text-base sm:text-lg text-[var(--sara-gray)] mb-8 leading-relaxed">
             Contact us today for a personalized consultation.
           </p>
-          <Link href="/book-now" className="sara-btn-primary">
+          <Link
+            href="/book-now"
+            className="sara-btn-primary focus:outline-2 focus:outline-offset-2 focus:outline-[var(--sara-red)]"
+          >
             Book Us Now
           </Link>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
