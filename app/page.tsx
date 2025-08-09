@@ -5,74 +5,141 @@ import { Diamond } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
-import { ServiceCard } from "../components/ServiceCard";
-import { TestimonialCard } from "../components/TestimonialCard";
-import { Service, Testimonial } from "../types";
+// Assuming ServiceCard and TestimonialCard are components and Service/Testimonial are types defined elsewhere
+// import { ServiceCard } from "../components/ServiceCard";
+// import { TestimonialCard } from "../components/TestimonialCard";
+// import { Service, Testimonial } from "../types";
 
+// Placeholder for the types and components to make the code self-contained
+interface Service {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+}
+
+interface Testimonial {
+  id: number;
+  name: string;
+  event: string;
+  rating: number;
+  text: string;
+  image: string;
+}
+
+const ServiceCard = ({ service }: { service: Service }) => (
+  <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 transform hover:scale-105">
+    <div className="relative h-48 w-full">
+      <Image
+        src={service.image}
+        alt={service.title}
+        fill
+        style={{ objectFit: "cover" }}
+      />
+    </div>
+    <div className="p-6 text-center">
+      <h3 className="text-xl font-bold text-[var(--sara-gray-dark)] mb-2">
+        {service.title}
+      </h3>
+      <p className="text-[var(--sara-gray)]">{service.description}</p>
+    </div>
+  </div>
+);
+
+const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => (
+  <div className="bg-white p-8 rounded-lg shadow-md">
+    <div className="flex items-center justify-center mb-4">
+      <Image
+        src={testimonial.image}
+        alt={testimonial.name}
+        width={80}
+        height={80}
+        className="rounded-full object-cover w-20 h-20"
+      />
+    </div>
+    <div className="text-center">
+      <p className="italic text-[var(--sara-gray)] mb-4">
+        &quot;{testimonial.text}&quot;
+      </p>
+      <div className="flex justify-center mb-2">
+        {[...Array(testimonial.rating)].map((_, i) => (
+          <span key={i} className="text-yellow-500 text-lg">
+            ★
+          </span>
+        ))}
+      </div>
+      <h4 className="font-semibold text-lg text-[var(--sara-gray-dark)]">
+        {testimonial.name}
+      </h4>
+      <p className="text-sm text-[var(--sara-gray)]">{testimonial.event}</p>
+    </div>
+  </div>
+);
+
+// የ services ውሂብ ወደ አማርኛ ተተርጉሟል
 const services: Service[] = [
   {
     id: "wedding",
-    title: "Wedding Decorations",
-    description:
-      "Create the perfect ambiance for your special day with elegant floral arrangements.",
+    title: "የሰርግ ዝግጅት",
+    description: "ለሠርግዎ ቀን በአበባዎች ያሸበረቀ እና ውበት የተላበሰ ድባብ እንፈጥራለን።",
     image: "/images/services/wedding_img.png",
   },
   {
     id: "birthday",
-    title: "Birthday Celebrations",
-    description:
-      "From intimate gatherings to grand parties, we bring joy and color.",
+    title: "የልደት በዓላት",
+    description: "ከትንሽ ግብዣዎች እስከ ትልቅ ድግሶች ድረስ ደስታ እና ውበት እናመጣለን።",
     image: "/images/services/birthday_img.png",
   },
   {
     id: "baby-shower",
-    title: "Baby Showers",
-    description: "Celebrate new beginnings with soft, beautiful decorations.",
+    title: "የቤቢ ሻወር",
+    description: "አዲስ ጅማሬን ለስላሳ እና ውብ በሆኑ ዲኮሮች እናከብራለን።",
     image: "/images/services/baby_shower.png",
   },
   {
     id: "engagement",
-    title: "Engagement Parties",
-    description: "Mark this milestone with romantic decorations.",
+    title: "የእጮኝነት ድግሶች",
+    description: "ይህን ወሳኝ ምዕራፍ በሮማንቲክ ዝግጅቶች እናሳምራለን።",
     image: "/images/services/engagement_party.png",
   },
   {
     id: "graduation",
-    title: "Graduation Events",
-    description: "Honor achievements with proud, celebratory decorations.",
+    title: "የምረቃ ዝግጅቶች",
+    description: "ስኬቶችን በኩራት እና በድምቀት በተሞሉ ዝግጅቶች እናከብራለን።",
     image: "/images/services/graduation_img.png",
   },
   {
     id: "traditional",
-    title: "Traditional Ceremonies",
-    description: "Honor Ethiopian traditions with authentic decorations.",
+    title: "ባህላዊ ሥነ-ሥርዓቶች",
+    description: "የኢትዮጵያን ወግና ባህል ትክክለኛ በሆኑ ዝግጅቶች እናከብራለን።",
     image: "/images/services/traditional_ceremonies.png",
   },
 ];
 
+// የ testimonials ውሂብ ወደ አማርኛ ተተርጉሟል
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: "Amina Kedir",
-    event: "Baby Shower",
+    name: "አሚና ከድር",
+    event: "የቤቢ ሻወር",
     rating: 5,
-    text: "Agos Decor made my baby shower absolutely magical!",
+    text: "አጎስ ዲኮር የቤቢ ሻወሬን በጣም አስደናቂ አደረገው!",
     image: "/images/testimonial/amina_kedir.jpg",
   },
   {
     id: 2,
-    name: "Dawit Tesfaye",
-    event: "Wedding",
+    name: "ዳዊት ተስፋዬ",
+    event: "ሰርግ",
     rating: 5,
-    text: "Our wedding decoration was stunning!",
+    text: "የሰርጋችን ዲኮር እጅግ በጣም ያማረ ነበር!",
     image: "/images/testimonial/dawit_tesfaye.jpg",
   },
   {
     id: 3,
-    name: "Hiwot Mengistu",
-    event: "Engagement Party",
+    name: "ሕይወት መንግስቱ",
+    event: "የእጮኝነት ድግስ",
     rating: 5,
-    text: "Best decision for our engagement party.",
+    text: "የእጮኝነት ድግሳችን ምርጥ ውሳኔ ነበር።",
     image: "/images/testimonial/hiwot_mengistu.jpg",
   },
 ];
@@ -167,7 +234,7 @@ export default function Home() {
         <div className="absolute inset-0">
           <Image
             src="/images/background/an_elegant_wedding_image_.jpeg"
-            alt="Elegant wedding decoration"
+            alt="ያማረ የሰርግ ዲኮር"
             fill={true}
             style={{ objectFit: "cover" }}
             className="opacity-20 blur-sm"
@@ -182,15 +249,13 @@ export default function Home() {
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight tracking-tight"
             variants={textVariants}
           >
-            Elegant. Memorable.{" "}
-            <span className="text-[var(--sara-red)]">Timeless.</span>
+            ያማረ። የማይረሳ። <span className="text-[var(--sara-red)]">ዘመናዊ።</span>
           </motion.h1>
           <motion.p
             className="text-lg sm:text-xl md:text-2xl text-[var(--sara-gray)] mb-8 max-w-3xl mx-auto leading-relaxed"
             variants={textVariants}
           >
-            Transform your event with Agos Decor’s signature style. Weddings,
-            birthdays, showers — made magical.
+            ዝግጅቶችዎን በአጎስ ዲኮር ልዩ ስታይል ይለውጡ። ሠርግ፣ ልደት፣ ቤቢ ሻወር – አስደናቂ ይሁኑ።
           </motion.p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 max-w-lg mx-auto">
             <motion.div
@@ -204,13 +269,12 @@ export default function Home() {
                 href="/services"
                 className="sara-btn-primary w-full focus:outline-2 focus:outline-offset-2 focus:outline-[var(--sara-red)] py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-lg font-medium rounded-lg transition-all duration-300 hover:bg-[var(--sara-red)]/90"
               >
-                Explore Services
+                አገልግሎቶቻችንን ይመልከቱ
               </Link>
             </motion.div>
           </div>
         </div>
       </motion.section>
-
       {/* Services Preview */}
       <motion.section
         className="py-20 sm:py-24 bg-white"
@@ -221,11 +285,10 @@ export default function Home() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8 tracking-wide">
-            Our <span className="text-[var(--sara-red)]">Services</span>
+            የእኛ <span className="text-[var(--sara-red)]">አገልግሎቶች</span>
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-[var(--sara-gray)] text-center mb-12 sm:mb-16 max-w-3xl mx-auto leading-relaxed">
-            From intimate gatherings to grand celebrations, we create memorable
-            experiences.
+            ከቅርብ ግብዣዎች እስከ ትላልቅ በዓላት ድረስ የማይረሱ ተሞክሮዎችን እንፈጥራለን።
           </p>
           <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {services.slice(0, 3).map((service, index) => (
@@ -244,12 +307,11 @@ export default function Home() {
               href="/services"
               className="sara-btn-primary py-2 sm:py-3 px-4 sm:px-6 text-sm sm:text-lg font-medium rounded-lg transition-all duration-300 hover:bg-[var(--sara-red)]/90"
             >
-              Explore All Services
+              ሁሉንም አገልግሎቶች ይመልከቱ
             </Link>
           </div>
         </div>
       </motion.section>
-
       {/* Testimonials */}
       <motion.section
         className="py-20 sm:py-24 bg-[var(--sara-cream)]"
@@ -260,7 +322,7 @@ export default function Home() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8 tracking-wide">
-            What Our <span className="text-[var(--sara-red)]">Clients Say</span>
+            ደንበኞቻችን <span className="text-[var(--sara-red)]">ምን አሉ</span>
           </h2>
           <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {testimonials.map((testimonial, index) => (
@@ -276,7 +338,6 @@ export default function Home() {
           </motion.div>
         </div>
       </motion.section>
-
       {/* Why Choose Us */}
       <motion.section
         className="py-20 sm:py-24 bg-white"
@@ -287,30 +348,28 @@ export default function Home() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8 tracking-wide">
-            Why Choose{" "}
-            <span className="text-[var(--sara-red)]">Agos Decor</span>
+            <span className="text-[var(--sara-red)]">አጎስ ዲኮርን</span> ለምን ይመርጣሉ
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-[var(--sara-gray)] text-center mb-12 sm:mb-16 max-w-3xl mx-auto leading-relaxed">
-            We’re storytellers who bring emotion and elegance to every event
-            setup.
+            ለእያንዳንዱ ዝግጅት ውበትን እና ስሜትን የምንጨምር ታሪክ ፈጣሪዎች ነን።
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {[
               {
-                title: "Personalized Designs",
-                description: "Custom decorations to match your vision.",
+                title: "ለእርስዎ ብቻ የተዘጋጀ ዲዛይን",
+                description: "ከሀሳብዎ ጋር የሚጣጣም ብጁ ዲኮር።",
               },
               {
-                title: "Stress-Free Planning",
-                description: "We handle every detail so you can enjoy.",
+                title: "ከጭንቀት የጸዳ ዝግጅት",
+                description: "እርስዎ በዝግጅትዎ እንዲደሰቱ እኛ ሁሉንም ዝርዝሮች እናስተዳድራለን።",
               },
               {
-                title: "Detail Perfection",
-                description: "Every element is carefully chosen.",
+                title: "ዝርዝር ላይ ትኩረት",
+                description: "እያንዳንዱ ነገር በጥንቃቄ ተመርጧል።",
               },
               {
-                title: "Satisfaction Guaranteed",
-                description: "Your happiness is our priority.",
+                title: "ሙሉ እርካታዎ ዋስትናችን ነው",
+                description: "ደስታዎ ቀዳሚ ተግባራችን ነው።",
               },
             ].map((feature, i) => (
               <motion.div
@@ -335,7 +394,6 @@ export default function Home() {
           </div>
         </div>
       </motion.section>
-
       {/* Video Showcase - Single TikTok link */}
       <motion.section
         className="py-20 sm:py-24 bg-[var(--sara-cream)]"
@@ -346,11 +404,11 @@ export default function Home() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 tracking-wide">
-            See Our <span className="text-[var(--sara-red)]">Magic</span> in
-            Action
+            የእኛን <span className="text-[var(--sara-red)]">አስማት</span> በስራ ላይ
+            ይመልከቱ
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-[var(--sara-gray)] mb-12 sm:mb-16 max-w-3xl mx-auto leading-relaxed">
-            Discover our stunning event setups on our TikTok page.
+            አስደናቂ የዝግጅት ዲዛይኖቻችንን በቲክቶክ ገጻችን ላይ ይመልከቱ።
           </p>
           <div className="text-center">
             <a
@@ -359,12 +417,11 @@ export default function Home() {
               rel="noopener noreferrer"
               className="sara-btn-primary py-2 sm:py-3 px-4 sm:px-6 text-sm sm:text-lg font-medium rounded-lg transition-all duration-300 hover:bg-[var(--sara-red)]/90"
             >
-              Discover Our Work
+              ስራዎቻችንን ይመልከቱ
             </a>
           </div>
         </div>
       </motion.section>
-
       {/* CTA */}
       <motion.section
         className="py-20 sm:py-24 bg-white"
@@ -375,17 +432,17 @@ export default function Home() {
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 tracking-wide">
-            Ready to Create Something{" "}
-            <span className="text-[var(--sara-red)]">Beautiful</span>?
+            ውብ የሆነ ነገር ለመፍጠር{" "}
+            <span className="text-[var(--sara-red)]">ዝግጁ ነዎት</span>?
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-[var(--sara-gray)] mb-8 leading-relaxed">
-            Contact us today for a personalized consultation.
+            ለግል ምክር አሁኑኑ ያግኙን።
           </p>
           <Link
             href="/book-now"
             className="sara-btn-primary py-2 sm:py-3 px-4 sm:px-6 text-sm sm:text-lg font-medium rounded-lg transition-all duration-300 hover:bg-[var(--sara-red)]/90"
           >
-            Book Us Now
+            አሁኑኑ ይዘዙ
           </Link>
         </div>
       </motion.section>

@@ -22,33 +22,30 @@ export default function About() {
 
   const team: TeamMember[] = [
     {
-      name: "Sara",
-      title: "Founder & Creative Director",
-      description:
-        "Visionary designer with a passion for aesthetics and storytelling.",
+      name: "ሳራ",
+      title: "መስራችና የፈጠራ ዳይሬክተር",
+      description: "ለዉበትና ለታሪክ ፍቅር ያለው ራዕይ ያለው ዲዛይነር።",
       image: "/images/about/sara_mekdes.jpg",
     },
     {
-      name: "Dagmawi",
-      title: "Event Coordinator",
-      description:
-        "Master of planning logistics and timelines for stress-free experiences.",
+      name: "ዳግማዊ",
+      title: "የዝግጅት አስተባባሪ",
+      description: "ጭንቀት የሌለባቸው ልምዶችን ለማቀድ የሎጂስቲክስ እና የጊዜ ሰሌዳ ባለሙያ።",
       image: "/images/about/dagmawi_elias.jpg",
     },
     {
-      name: "Blen",
-      title: "Styling Assistant",
-      description:
-        "Detail-focused artist with a flair for floral and table styling.",
+      name: "ብሌን",
+      title: "የማስጌጥ ረዳት",
+      description: "ለዝርዝር ጉዳዮች ትኩረት የሚሰጥ የአበቦችን እና የጠረጴዛዎችን ማስጌጥ የሚያውቅ አርቲስት።",
       image: "/images/about/blen_abera.jpg",
     },
   ];
 
   const features = [
-    { name: "Personalized Designs", icon: FaPaintBrush },
-    { name: "Transparent Process", icon: FaHandsHelping },
-    { name: "Timely Execution", icon: FaCalendarCheck },
-    { name: "Budget-Friendly Packages", icon: FaDollarSign },
+    { name: "የግል ዲዛይን", icon: FaPaintBrush },
+    { name: "ግልጽ የስራ ሂደት", icon: FaHandsHelping },
+    { name: "ወቅታዊ አፈጻጸም", icon: FaCalendarCheck },
+    { name: "የበጀት ተስማሚ ጥቅሎች", icon: FaDollarSign },
   ];
 
   // Animation variants with reduced motion support
@@ -79,16 +76,12 @@ export default function About() {
             className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-8 relative inline-block group"
             aria-label="Our Story"
           >
-            Our{" "}
-            <span className="text-[var(--sara-red)]" aria-hidden="true">
-              Story
-            </span>
+            ታሪካችን
             <span className="block absolute bottom-0 left-0 h-1 bg-[var(--sara-red)] w-0 group-hover:w-full transition-all duration-500 ease-in-out"></span>
           </h1>
           <p className="text-base sm:text-lg text-[var(--sara-gray)] max-w-3xl mx-auto leading-relaxed font-light">
-            At Agos Decor, every event is a canvas. Founded with passion and
-            creativity, we’ve spent years perfecting the art of modern,
-            luxurious, and culturally inspired decor.
+            በአጎስ ዲኮር፣ እያንዳንዱ ዝግጅት ሸራ ነው። በፍቅር እና በፈጠራ የተመሰረተን ሲሆን፣ ለዘመናዊ፣ ለቅንጦት
+            እና ለባህላዊ ዲኮር ጥበብን በማሟላት አመታትን አሳልፈናል።
           </p>
         </motion.section>
 
@@ -102,7 +95,7 @@ export default function About() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            Meet the Team
+            ቡድናችንን ይተዋወቁ
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {team.map((member, index) => (
@@ -155,7 +148,7 @@ export default function About() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            What Sets Us Apart
+            የሚለየን ምንድን ነው?
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((item, i) => (
@@ -212,17 +205,15 @@ export default function About() {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-            Let’s Make Your Event{" "}
-            <span className="underline decoration-wavy decoration-white/50">
-              Unforgettable
-            </span>
+            ዝግጅትዎን የማይረሳ እናድርገው
+            <span className="underline decoration-wavy decoration-white/50"></span>
           </h2>
           <Link
             href="/book-now"
             className="sara-btn-primary hover:scale-105 transition-transform duration-300 text-lg bg-white text-[var(--sara-red)] font-bold py-4 px-10 rounded-full inline-block mt-4"
             aria-label="Book us now"
           >
-            Book Us Now
+            አሁኑኑ ያስይዙን
           </Link>
         </motion.section>
       </div>

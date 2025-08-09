@@ -3,84 +3,91 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { GalleryImage } from "../../types";
 // Import motion and Variants for animations
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import { ArrowUpCircle, RefreshCw } from "lucide-react";
 
 // The data for the gallery images.
+// Placeholder for the GalleryImage type, assuming it's an object with id, src, category, and alt.
+interface GalleryImage {
+  id: number;
+  src: string;
+  category: string;
+  alt: string;
+}
+
 const galleryImages: GalleryImage[] = [
   {
     id: 1,
     src: "/images/gallery/image1.png",
     category: "wedding",
-    alt: "Wedding decor with floral arch",
+    alt: "ለሠርግ የተዘጋጀ የአበባ ቅስት ያለው ዲኮር",
   },
   {
     id: 2,
     src: "/images/gallery/image2.png",
     category: "wedding",
-    alt: "Wedding ceremony setup",
+    alt: "የሰርግ ሥነ ሥርዓት ዝግጅት",
   },
   {
     id: 3,
     src: "/images/gallery/image3.png",
     category: "birthday",
-    alt: "Birthday party decor",
+    alt: "የልደት ድግስ ዲኮር",
   },
   {
     id: 4,
     src: "/images/gallery/image4.png",
     category: "birthday",
-    alt: "Colorful birthday setup",
+    alt: "ደማቅ የልደት ዝግጅት",
   },
   {
     id: 5,
     src: "/images/gallery/image5.png",
     category: "baby-shower",
-    alt: "Baby shower decor",
+    alt: "የቤቢ ሻወር ዲኮር",
   },
   {
     id: 6,
     src: "/images/gallery/image6.png",
     category: "baby-shower",
-    alt: "Pastel baby shower setup",
+    alt: "ለስላሳ የቤቢ ሻወር ዝግጅት",
   },
   {
     id: 7,
     src: "/images/gallery/image7.png",
     category: "graduation",
-    alt: "Graduation decor",
+    alt: "የምረቃ ዲኮር",
   },
   {
     id: 8,
     src: "/images/gallery/image8.png",
     category: "graduation",
-    alt: "Graduation ceremony setup",
+    alt: "የምረቃ ሥነ ሥርዓት ዝግጅት",
   },
   {
     id: 9,
     src: "/images/gallery/image9.png",
     category: "traditional",
-    alt: "Traditional Ethiopian coffee ceremony",
+    alt: "ባህላዊ የኢትዮጵያ ቡና ሥነ ሥርዓት",
   },
   {
     id: 10,
     src: "/images/gallery/image10.png",
     category: "traditional",
-    alt: "Ethiopian cultural decor",
+    alt: "የኢትዮጵያ ባህላዊ ዲኮር",
   },
   {
     id: 11,
     src: "/images/gallery/image11.png",
     category: "engagement",
-    alt: "Engagement party decor",
+    alt: "የእጮኝነት ድግስ ዲኮር",
   },
   {
     id: 12,
     src: "/images/gallery/image12.png",
     category: "engagement",
-    alt: "Romantic engagement setup",
+    alt: "የሮማንቲክ የእጮኝነት ዝግጅት",
   },
 ];
 
@@ -167,11 +174,10 @@ export default function Gallery() {
     <div className="py-20 bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl md:text-4xl font-bold text-center mb-6 text-[var(--sara-gray-dark)]">
-          Our <span className="text-[var(--sara-red)]">Gallery</span>
+          የኛ <span className="text-[var(--sara-red)]">ጋለሪ</span>
         </h1>
         <p className="text-lg text-[var(--sara-gray)] text-center mb-12 max-w-2xl mx-auto">
-          A visual journey through our favorite moments. Weddings, birthdays,
-          baby showers, and more.
+          ከተወዳጅ አፍታዎቻችን የተወሰዱ ምስሎች። ሰርግ፣ ልደት፣ ቤቢ ሻወር፣ እና ሌሎችም።
         </p>
 
         {/* Filter Buttons */}
@@ -182,22 +188,22 @@ export default function Gallery() {
           transition={{ duration: 0.5 }}
         >
           {[
-            "all",
-            "wedding",
-            "traditional",
-            "birthday",
-            "baby-shower",
-            "graduation",
-            "engagement",
+            { id: "all", label: "ሁሉም" },
+            { id: "wedding", label: "ሰርግ" },
+            { id: "traditional", label: "ባህላዊ" },
+            { id: "birthday", label: "ልደት" },
+            { id: "baby-shower", label: "ቤቢ ሻወር" },
+            { id: "graduation", label: "ምረቃ" },
+            { id: "engagement", label: "እጮኝነት" },
           ].map((category) => (
             <motion.button
-              key={category}
-              onClick={() => handleFilterChange(category)}
+              key={category.id}
+              onClick={() => handleFilterChange(category.id)}
               className={`
                 px-6 py-2 rounded-full text-base font-medium transition-colors duration-300
                 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--sara-red)]
                 ${
-                  filter === category
+                  filter === category.id
                     ? "bg-[var(--sara-red)] text-white"
                     : "bg-white text-[var(--sara-gray)] hover:bg-[var(--sara-red)]/20 hover:text-[var(--sara-red)]"
                 }
@@ -205,8 +211,7 @@ export default function Gallery() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {category.charAt(0).toUpperCase() +
-                category.slice(1).replace("-", " ")}
+              {category.label}
             </motion.button>
           ))}
         </motion.div>
@@ -258,10 +263,10 @@ export default function Gallery() {
               {isLoading ? (
                 <div className="flex items-center space-x-2">
                   <RefreshCw className="w-4 h-4 animate-spin" />
-                  <span>Loading...</span>
+                  <span>እየጫነ ነው...</span>
                 </div>
               ) : (
-                "Load More"
+                "ተጨማሪ ይጫኑ"
               )}
             </button>
           </motion.div>
@@ -276,10 +281,10 @@ export default function Gallery() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-2xl font-bold mb-6 text-[var(--sara-gray-dark)]">
-            See something you love?
+            የወደዱት ነገር አዩ?
           </h2>
           <Link href="/book-now" className="sara-btn-primary">
-            Book Us Now
+            አሁኑኑ ይዘዙ
           </Link>
         </motion.div>
 

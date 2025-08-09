@@ -84,7 +84,7 @@ const ContactForm = () => {
           animate={{ opacity: 1 }}
           className="text-center text-xl font-semibold text-[var(--sara-red)]"
         >
-          Thank you! Your message has been sent.
+          እናመሰግናለን! መልዕክትዎ ተልኳል።
         </motion.div>
       ) : (
         <>
@@ -93,7 +93,7 @@ const ContactForm = () => {
               htmlFor="name"
               className="block text-sm font-medium text-gray-700"
             >
-              Name
+              ስም
             </label>
             <input
               type="text"
@@ -110,7 +110,7 @@ const ContactForm = () => {
               htmlFor="email"
               className="block text-sm font-medium text-gray-700"
             >
-              Email
+              ኢሜይል
             </label>
             <input
               type="email"
@@ -127,7 +127,7 @@ const ContactForm = () => {
               htmlFor="message"
               className="block text-sm font-medium text-gray-700"
             >
-              Message
+              መልዕክት
             </label>
             <textarea
               id="message"
@@ -149,10 +149,10 @@ const ContactForm = () => {
             {isLoading ? (
               <div className="flex items-center space-x-2">
                 <RefreshCw className="w-4 h-4 animate-spin" />
-                <span>Sending...</span>
+                <span>በመላክ ላይ...</span>
               </div>
             ) : (
-              "Send Message"
+              "መልዕክት ይላኩ"
             )}
           </button>
         </>
@@ -181,10 +181,10 @@ export default function Contact() {
           className="text-center mb-12"
         >
           <h1 className="text-3xl md:text-4xl font-bold text-[var(--sara-gray-dark)] mb-6">
-            Contact <span className="text-[var(--sara-red)]">Agos Decor</span>
+            አግኝተን ያነጋግሩን
           </h1>
           <p className="text-lg text-[var(--sara-gray)] max-w-2xl mx-auto">
-            Let’s start planning your perfect event.
+            የተለየ ዝግጅትዎን አብረን እናቅድ።
           </p>
         </motion.div>
 
@@ -197,24 +197,24 @@ export default function Contact() {
             viewport={{ once: true, amount: 0.2 }}
           >
             <h2 className="text-2xl font-bold mb-6 text-[var(--sara-gray-dark)]">
-              Get in Touch
+              ያነጋግሩን
             </h2>
             <div className="space-y-6">
               {[
                 {
                   icon: <Phone className="h-5 w-5" />,
                   title: "+251 911 123 456",
-                  subtitle: "Call or WhatsApp",
+                  subtitle: "ይደውሉ ወይም ዋትስአፕ ላይ ያውሩ",
                 },
                 {
                   icon: <Mail className="h-5 w-5" />,
                   title: "info@agosdecor.com",
-                  subtitle: "24/7 Support",
+                  subtitle: "24/7 ድጋፍ",
                 },
                 {
                   icon: <MapPin className="h-5 w-5" />,
-                  title: "Bole, Addis Ababa",
-                  subtitle: "Ethiopia",
+                  title: "ቦሌ, አዲስ አበባ",
+                  subtitle: "ኢትዮጵያ",
                 },
               ].map((item, index) => (
                 <motion.div
@@ -247,7 +247,7 @@ export default function Contact() {
             viewport={{ once: true, amount: 0.2 }}
           >
             <h2 className="text-2xl font-bold mb-6 text-[var(--sara-gray-dark)]">
-              Send Us a Message
+              መልዕክት ይላኩልን
             </h2>
             <ContactForm />
           </motion.div>
@@ -262,10 +262,10 @@ export default function Contact() {
           viewport={{ once: true, amount: 0.2 }}
         >
           <h2 className="text-2xl font-bold mb-6 text-[var(--sara-gray-dark)]">
-            Prefer a quick chat?
+            በፍጥነት ማውራት ይፈልጋሉ?
           </h2>
           <Link href="/book-now" className="sara-btn-primary">
-            Book Us Now
+            አሁኑኑ ያስይዙን
           </Link>
         </motion.div>
       </div>

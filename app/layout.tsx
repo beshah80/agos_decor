@@ -4,9 +4,9 @@ import { Navbar } from "../components/Navbar";
 import "./globals.css";
 
 export const metadata = {
-  title: "Agos Decor – Event Decor in Addis Ababa",
+  title: "አጎስ ዲኮር - በአዲስ አበባ ለተለያዩ ዝግጅቶች",
   description:
-    "Transform your events with Agos Decor’s elegant, personalized styling for weddings, birthdays, and more in Addis Ababa, Ethiopia.",
+    "በአዲስ አበባ፣ ኢትዮጵያ ውስጥ ሰርግን፣ ልደትን፣ እና ሌሎች ዝግጅቶችን በአጎስ ዲኮር ልዩ እና ግላዊ በሆኑ ዲዛይኖች ያሳምሩ።",
 };
 
 export default function RootLayout({
